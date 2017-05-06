@@ -49,9 +49,10 @@ public class DatabaseLoader implements CommandLineRunner {
 
         Client client = new TransportClient()
                 .addTransportAddress(new InetSocketTransportAddress("127.0.0.1", 9300));
-        if (articleRepository.count() != 0) {
 
-            for (int i = 1999; i < 2000; i++) {
+        if (articleRepository.count() == 0) {
+
+            for (int i = 1992; i < 1994; i++) {
                 try {
                     SearchResponse response = client.prepareSearch("arxiv2").setTypes("arxiv" + i).setSize(2000).execute().actionGet();
                     SearchHits searchHits = response.getHits();

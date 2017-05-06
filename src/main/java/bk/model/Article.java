@@ -68,6 +68,17 @@ public class Article {
     @ManyToOne(fetch = FetchType.EAGER, cascade= CascadeType.ALL, targetEntity = Journal.class)
     Journal journal;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "article", cascade = CascadeType.ALL)
+    List<Artkeyword> artkeywords;
+
+    public List<Artkeyword> getArtkeywords() {
+        return artkeywords;
+    }
+
+    public void setArtkeywords(List<Artkeyword> keywords) {
+        this.artkeywords = keywords;
+    }
+
     public Journal getJournal() {
         return journal;
     }
