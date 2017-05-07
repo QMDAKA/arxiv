@@ -39,25 +39,15 @@ public class Article {
         this.idiot = idiot;
     }
 
-    public List<Author> getAuthors() {
-        return authors;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "article", cascade = CascadeType.ALL)
+    List<ArtAuthor> artAuthors;
+
+    public List<ArtAuthor> getArtAuthors() {
+        return artAuthors;
     }
 
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
-    }
-
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "article_authors", joinColumns = @JoinColumn(name = "article_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"))
-    List<Author> authors;
-
-    public List<Author> getAuthorList() {
-        return authors;
-    }
-
-    public void setAuthorList(List<Author> authorList) {
-        this.authors = authorList;
+    public void setArtAuthors(List<ArtAuthor> artAuthors) {
+        this.artAuthors = artAuthors;
     }
 
     @JsonIgnore
@@ -70,6 +60,17 @@ public class Article {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "article", cascade = CascadeType.ALL)
     List<Artkeyword> artkeywords;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "article", cascade = CascadeType.ALL)
+    List<CoAuthorship> coAuthorships;
+
+    public List<CoAuthorship> getCoAuthorships() {
+        return coAuthorships;
+    }
+
+    public void setCoAuthorships(List<CoAuthorship> coAuthorships) {
+        this.coAuthorships = coAuthorships;
+    }
 
     public List<Artkeyword> getArtkeywords() {
         return artkeywords;
@@ -152,7 +153,7 @@ public class Article {
     }
 
     public Article() {
-        this.authors=new ArrayList<>();
+        this.artAuthors=new ArrayList<>();
     }
     public Article(SearchHit hit){
         this.setTitle(hit.getSource().get("title").toString());
@@ -160,7 +161,7 @@ public class Article {
         this.setUrl(hit.getSource().get("url").toString());
         this.setYear((Integer) hit.getSource().get("year"));
         this.setCode(hit.getSource().get("code").toString());
-        this.authors=new ArrayList<>();
+        this.artAuthors=new ArrayList<>();
 
     }
     public String getCode() {

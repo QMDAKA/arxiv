@@ -50,9 +50,9 @@ public class DatabaseLoader implements CommandLineRunner {
         Client client = new TransportClient()
                 .addTransportAddress(new InetSocketTransportAddress("127.0.0.1", 9300));
 
-        if (articleRepository.count() == 0) {
+        if (articleRepository.count() >= 0) {
 
-            for (int i = 1992; i < 1994; i++) {
+            for (int i = 1992; i < 1993; i++) {
                 try {
                     SearchResponse response = client.prepareSearch("arxiv2").setTypes("arxiv" + i).setSize(2000).execute().actionGet();
                     SearchHits searchHits = response.getHits();
@@ -66,26 +66,23 @@ public class DatabaseLoader implements CommandLineRunner {
                         }
 
                         Article article = new Article(hit);
-                        if(article.getTitle().length()>254)
-                        {
-                            continue;
-                        }
-                        articleRepository.save(article);
-
-
+                        articleRepository.saveAndFlush(article);
                         ArrayList<String> authorList = (ArrayList<String>) hit.getSource().get("authors");
                         article.setTotalAuthor(authorList.size());
 
                         //ArrayList<Author> authors=new ArrayList<>();
-                        for (int j = 0; j < 3; j++) {
+                        for (int j = 0; j < 6; j++) {
                             if (j + 1 > authorList.size())
                                 break;
                             else {
-                                Author author = getAuthorByName(authorList.get(j));
-                                author.getArticleList().add(article);
-                                authorRepository.save(author);
-                                article.getAuthorList().add(author);
-                                articleRepository.saveAndFlush(article);
+                                Author author=getAuthorByName(authorList.get(j));
+                                ArtAuthor artAuthor=new ArtAuthor();
+                                artAuthor.setAuthor(author);
+                                artAuthor.setOrderAuthor(j);
+                                artAuthor.setArticle(article);
+                                article.getArtAuthors().add(artAuthor);
+                                articleRepository.save(article);
+
 
 
                             }

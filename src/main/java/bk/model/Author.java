@@ -18,16 +18,20 @@ public class Author {
 
     String name;
 
-    @ManyToMany(mappedBy = "authors")
-    @JsonIgnore
-    List<Article> articles;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author", cascade = CascadeType.ALL)
+    List<ArtAuthor> artAuthors;
 
-    public List<Article> getArticleList() {
-        return articles;
+    /**
+     *
+     *
+     * @return artAuthors
+     */
+    public List<ArtAuthor> getArtAuthors() {
+        return artAuthors;
     }
 
-    public void setArticleList(List<Article> articleList) {
-        this.articles = articleList;
+    public void setArtAuthors(List<ArtAuthor> artAuthors) {
+        this.artAuthors = artAuthors;
     }
 
     public Long getId() {
@@ -46,6 +50,6 @@ public class Author {
         this.name = name;
     }
     public Author(){
-        this.articles=new ArrayList<>();
+        this.artAuthors=new ArrayList<>();
     }
 }
