@@ -18,7 +18,7 @@ public class Journal {
     String name;
     @JsonIgnore
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "journal", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "journal", cascade = CascadeType.ALL)
     List<Article> articleList;
 
 

@@ -1,6 +1,7 @@
 package bk.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,8 +17,16 @@ public class Keyword {
 
     String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "keyword", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "keyword", cascade = CascadeType.ALL)
     List<Artkeyword> artkeywords;
+
+    public List<Artkeyword> getArtkeywords() {
+        return artkeywords;
+    }
+
+    public void setArtkeywords(List<Artkeyword> artkeywords) {
+        this.artkeywords = artkeywords;
+    }
 
     public Long getId() {
         return id;
@@ -43,6 +52,7 @@ public class Keyword {
         this.status = status;
     }
 
-
-
+    public Keyword() {
+        this.artkeywords=new ArrayList<>();
+    }
 }

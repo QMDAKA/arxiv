@@ -39,7 +39,7 @@ public class Article {
         this.idiot = idiot;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "article", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "article", cascade = CascadeType.ALL)
     List<ArtAuthor> artAuthors;
 
     public List<ArtAuthor> getArtAuthors() {
@@ -51,18 +51,18 @@ public class Article {
     }
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER, cascade= CascadeType.ALL, targetEntity = Subject.class)
+    @ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.ALL, targetEntity = Subject.class)
     Subject subject;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER, cascade= CascadeType.ALL, targetEntity = Journal.class)
+    @ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.ALL, targetEntity = Journal.class)
     Journal journal;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "article", cascade = CascadeType.ALL)
-    List<Artkeyword> artkeywords;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "article", cascade = CascadeType.ALL)
+    List<Artkeyword> artkeywords=new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "article", cascade = CascadeType.ALL)
-    List<CoAuthorship> coAuthorships;
+    List<CoAuthorship> coAuthorships=new ArrayList<>();
 
     public List<CoAuthorship> getCoAuthorships() {
         return coAuthorships;

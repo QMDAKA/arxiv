@@ -44,7 +44,7 @@ public class Subject {
     }
     @JsonIgnore
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "subject", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject", cascade = CascadeType.ALL)
     List<Article> articleList;
 
     public List<Article> getArticleList() {

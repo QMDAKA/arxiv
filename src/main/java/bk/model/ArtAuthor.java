@@ -17,11 +17,11 @@ public class ArtAuthor {
 
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER, cascade= CascadeType.ALL, targetEntity = Author.class)
+    @ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.ALL, targetEntity = Author.class)
     Author author;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER, cascade= CascadeType.ALL, targetEntity = Article.class)
+    @ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.ALL, targetEntity = Article.class)
     Article article;
 
     public Author getAuthor() {

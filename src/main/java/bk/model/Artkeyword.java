@@ -15,12 +15,22 @@ public class Artkeyword  {
     Long id;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER, cascade= CascadeType.ALL, targetEntity = Keyword.class)
+    @ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.ALL, targetEntity = Keyword.class)
     Keyword keyword;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER, cascade= CascadeType.ALL, targetEntity = Article.class)
+    @ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.ALL, targetEntity = Article.class)
     Article article;
+
+    int frequency;
+
+    public int getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(int frequency) {
+        this.frequency = frequency;
+    }
 
     public Keyword getKeyword() {
         return keyword;

@@ -18,7 +18,7 @@ public class Author {
 
     String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "author", cascade = CascadeType.ALL)
     List<ArtAuthor> artAuthors;
 
     /**
