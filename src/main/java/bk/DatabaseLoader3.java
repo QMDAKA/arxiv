@@ -26,9 +26,9 @@ public class DatabaseLoader3 implements CommandLineRunner{
     @Override
     @javax.transaction.Transactional
     public void run(String... args) throws Exception {
-        if (true) {
+        if (false) {
             int pivot =0 ;
-            for(int i=1995;i<1997;i++) {
+            for(int i=2005;i<2006;i++) {
                 for (Article article : articleRepository.findByYear(i)) {
                     if (article.getArtkeywords().size() == 0) {
                         String masterString = article.getTitle() + article.getAbastract();

@@ -70,7 +70,10 @@ public class Url {
     }
 
     public Url(SearchHit hit){
-        this.setTitle(hit.getSource().get("title").toString());
+        if(hit.getSource().get("title").toString().length()>200)
+            this.setTitle(hit.getSource().get("title").toString().substring(0,200));
+        else
+            this.setTitle(hit.getSource().get("title").toString());
         this.setJournal(hit.getSource().get("journal").toString());
         this.setUrl(hit.getSource().get("url").toString());
         this.setYear((Integer) hit.getSource().get("year"));

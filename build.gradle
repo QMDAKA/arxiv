@@ -29,6 +29,8 @@ repositories {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+// https://mvnrepository.com/artifact/org.jgrapht/jgrapht-core
+    compile group: 'org.jgrapht', name: 'jgrapht-core', version: '1.0.1'
 
     compile("org.springframework.boot:spring-boot-starter-data-rest")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -41,6 +43,7 @@ dependencies {
     compile 'org.apache.httpcomponents:httpclient:4.5'
     compile("org.elasticsearch:elasticsearch:1.6.0")
     compile group: 'org.apache.tika', name: 'tika-parsers', version: '1.7'
+    compile 'edu.stanford.nlp:stanford-corenlp:3.7.0'
 
     compile("org.json:json")
     compile 'org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE'

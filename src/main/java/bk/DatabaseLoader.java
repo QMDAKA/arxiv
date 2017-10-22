@@ -47,12 +47,14 @@ public class DatabaseLoader implements CommandLineRunner {
     @Transactional
     public void run(String... string) {
 
-        Client client = new TransportClient()
-                .addTransportAddress(new InetSocketTransportAddress("127.0.0.1", 9300));
 
         if (false) {
+
+            Client client = new TransportClient()
+                    .addTransportAddress(new InetSocketTransportAddress("127.0.0.1", 9300));
+
             int pivot=0;
-            for (int i = 2002; i < 2005; i++) {
+            for (int i = 2003; i < 2005; i++) {
                 try {
                     SearchResponse response = client.prepareSearch("arxiv2").setTypes("arxiv" + i).setSize(2000).execute().actionGet();
                     SearchHits searchHits = response.getHits();
